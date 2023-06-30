@@ -1,19 +1,20 @@
 <mat-toolbar color="primary">
     <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
-      <mat-icon>menu</mat-icon>
+      <mat-icon>laptop_chromebook</mat-icon>
     </button>
     <span>Lab Angular</span>
     <ul class="listMenu">
-        <li class="listItem"><a class="color" [routerLink]="['/home']" [routerLinkActive]="['active', 'colorActive']">Home</a></li>
-        <li class="listItem"><a class="color" [routerLink]="['/login']" [routerLinkActive]="['active', 'colorActive']">Login</a></li>
-        <li class="listItem"><a class="color" [routerLink]="['/about']" [routerLinkActive]="['active', 'colorActive']">About</a></li>
-        <li class="listItem"><a class="color" [routerLink]="['/dashboard']" [routerLinkActive]="['active', 'colorActive']">Dashboard</a></li>
-        <li class="listItem"><a class="color" [routerLink]="['/galeria']" [routerLinkActive]="['active', 'colorActive']">Galery</a></li>
-        <li class="listItem"><a class="color" [routerLink]="['/crud']" [routerLinkActive]="['active', 'colorActive']">Crud</a></li>
-        <li class="listItem"><a class="color" [routerLink]="['/profile']" [routerLinkActive]="['active', 'colorActive']">Profile</a></li>
+        <li *ngIf="!isLoggin" class="listItem"><a class="color" [routerLink]="['/home']" [routerLinkActive]="['active', 'colorActive']">Home</a></li>
+        <li *ngIf="!isLoggin" class="listItem"><a class="color" [routerLink]="['/login']" [routerLinkActive]="['active', 'colorActive']">Login</a></li>
+        <li *ngIf="!isLoggin" class="listItem"><a class="color" [routerLink]="['/about']" [routerLinkActive]="['active', 'colorActive']">About</a></li>
+        <li *ngIf="isLoggin" class="listItem"><a class="color" [routerLink]="['/dashboard']" [routerLinkActive]="['active', 'colorActive']">Dashboard</a></li>
+        <li *ngIf="isLoggin" class="listItem"><a class="color" [routerLink]="['/galeria']" [routerLinkActive]="['active', 'colorActive']">Galery</a></li>
+        <li *ngIf="isLoggin" class="listItem"><a class="color" [routerLink]="['/crud']" [routerLinkActive]="['active', 'colorActive']">Crud</a></li>
+        <li *ngIf="isLoggin" class="listItem"><a class="color" [routerLink]="['/profile']" [routerLinkActive]="['active', 'colorActive']">Profile</a></li>
     </ul>
-    <span class="example-spacer"></span>
-    <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
-      <mat-icon>logout</mat-icon>
+    <div class="flex-grow"></div>
+    <span *ngIf="isLoggin" class="example-spacer username">Hola, {{username}}</span>
+    <button (click)="logout()" mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
+      <mat-icon class="icon-logout">logout</mat-icon>
     </button>
 </mat-toolbar>

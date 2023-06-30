@@ -1,5 +1,4 @@
 import { Routes, RouterModule } from '@angular/router';
-
 import { HomeComponent } from './components/home/home.component';
 import { AboutComponent } from './components/about/about.component';
 import { CrudComponent } from './components/crud/crud.component';
@@ -17,7 +16,6 @@ const ROUTES: Routes = [
     { path: 'login', component: LoginComponent },
     { path: 'profile', component: ProfileComponent },
     { path: '**', pathMatch: 'full', redirectTo: 'home' },
-
 ];
 
 export const APP_ROUTING = RouterModule.forRoot(ROUTES);

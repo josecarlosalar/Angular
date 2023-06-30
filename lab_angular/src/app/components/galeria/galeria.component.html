@@ -1,1 +1,28 @@
-<p>galeria works!</p>
+<mat-grid-list cols="1" rowHeight="600">
+    <div class="container">
+        <div class="row">
+            <img [style.width.px]="width" [src]="url" [alt]="alt">
+            <p class="alt">{{alt}}</p>
+        </div>
+        <div class="row2">
+            <ul class="lista">
+                <li *ngFor="let fotos of listaFotos">
+                    <img (click)="view(fotos)" class="image" src="{{fotos.src}}" alt="{{fotos.title}}">
+
+                </li>
+            </ul>
+        </div>
+        <div class="row3">
+            <section>
+                <mat-button-toggle-group aria-label="Font Style">
+                    <mat-button-toggle (click)="anterior()" value="bold">Anterior</mat-button-toggle>
+                    <mat-button-toggle (click)="siguiente()" value="italic">Siguiente</mat-button-toggle>
+                    <mat-button-toggle (click)="aumentar()" value="underline">Aumentar</mat-button-toggle>
+                    <mat-button-toggle (click)="disminuir()" value="bold">Disminuir</mat-button-toggle>
+                    <mat-button-toggle (click)="play()" value="italic">Play</mat-button-toggle>
+                    <mat-button-toggle (click)="stop()" value="underline">Stop</mat-button-toggle>
+                </mat-button-toggle-group>
+            </section>
+        </div>
+    </div>
+</mat-grid-list>
