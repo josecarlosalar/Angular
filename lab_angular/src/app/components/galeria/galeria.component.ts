@@ -28,7 +28,7 @@ export class GaleriaComponent {
   url='';
   alt='';
   id=1;
-  width=700;
+  width=600;
   goPlay = false;
   disableSig = false;
   disableAnt = false;

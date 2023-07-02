@@ -28,6 +28,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { APP_ROUTING } from './app.routes';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { RotateDirective } from './directives/rotate.directive';
+import { FooterComponent } from './components/footer/footer.component';
 
 
 @NgModule({
@@ -41,7 +42,8 @@ import { RotateDirective } from './directives/rotate.directive';
     CrudComponent,
     ProfileComponent,
     NavbarComponent,
-    RotateDirective
+    RotateDirective,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
