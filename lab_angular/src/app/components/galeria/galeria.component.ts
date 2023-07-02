@@ -27,48 +27,125 @@ export class GaleriaComponent {
 
   url='';
   alt='';
-  id=0;
+  id=1;
   width=700;
   goPlay = false;
+  disableSig = false;
+  disableAnt = false;
+  startIndex = 0;
+  itemsPage = 3;
+  grados = 10;
+  step = 5;
 
   constructor(){
     this.url = '../../assets/gallery1.webp';
     this.alt = 'Foto 1';
     this.id = 1;
 
-    setInterval(()=>{
-      if (this.goPlay) {
-        this.siguiente()
-      }
-    },2000);
+    this.comprobarId();
+    this.reproducirFotos();
   }
 
   view(fotos:Foto){
       this.url = fotos.src;
       this.alt = fotos.title;
+      this.id = fotos.id;
+      
+      this.comprobarId();
   }
 
-
-  anterior(){
-    if (this.id == 1) {
-      this.id=this.listaFotos.length;
-    } else {
-      this.id = this.id-1;
+  reproducirFotos(){
+    
+    setInterval(()=>{
+      
+      if (this.goPlay) {
+        if (this.id == 8) {
+          this.id = 1;
+        } else {
+          this.id = this.id+1;
+        }
+        const result = this.listaFotos.filter(filtro => filtro.id == this.id);
+        this.view(result[0]);
+        this.comprobarId();
+        
+      }
+    },2000);
+  }
+    
+  comprobarId(){
+    if (this.id == 1){
+      this.disableAnt = true;
+    }
+    
+    if (this.id > 1) {
+      this.disableAnt = false;
     }
 
-    const result = this.listaFotos.filter(filtro => filtro.id == this.id);
-    this.view(result[0]);
+    if (this.id == 8){
+      this.disableSig = true;
+    }
+    
+    if (this.id < 8) {
+      this.disableSig = false;
+    }
+
+    if (this.id < 3) {
+      this.startIndex = 0;
+    }
+
+    if (this.id > 3 && this.id < 6) {
+      this.startIndex = 3;
+    }
+
+    if (this.id >6 && this.id < 9) {
+      this.startIndex = 6;
+    }
+
+  }
+
+  borderImg(fotos:Foto):string{
+    if (this.id == fotos.id){
+      return "2px solid red";
+    }
+    return "none";
+  }
+
+  anterior(){
+    if (!this.disableAnt){
+      if (this.id == 1){
+        this.disableAnt = true;
+      } else {
+        this.id = this.id-1;
+        const result = this.listaFotos.filter(filtro => filtro.id == this.id);
+        this.view(result[0]);
+      }
+      this.comprobarId();
+    }
   }
 
   siguiente(){
-    if (this.id == 8) {
-      this.id=1;
-    } else {
-      this.id = this.id+1;
+    if (!this.disableSig){
+      if (this.id == 8){
+        this.disableSig = true;
+      } else {
+        this.id = this.id+1;
+        const result = this.listaFotos.filter(filtro => filtro.id == this.id);
+        this.view(result[0]);
+      }
+      this.comprobarId();
     }
+  }
 
-    const result = this.listaFotos.filter(filtro => filtro.id == this.id);
-    this.view(result[0]);
+  anteriorPag() {
+    if (this.startIndex > 1) {
+      this.startIndex -= this.itemsPage;
+    }
+  }
+  
+  siguientePag() {
+    if (this.startIndex <= 3) {
+      this.startIndex += this.itemsPage;
+    }
   }
 
   aumentar(){
@@ -86,8 +163,4 @@ export class GaleriaComponent {
    stop(){
     this.goPlay = false;
    }
-
-  
-
-
 }

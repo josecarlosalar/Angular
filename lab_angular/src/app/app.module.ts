@@ -27,6 +27,7 @@ import { CrudComponent } from './components/crud/crud.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { APP_ROUTING } from './app.routes';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { RotateDirective } from './directives/rotate.directive';
 
 
 @NgModule({
@@ -39,7 +40,8 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     GaleriaComponent,
     CrudComponent,
     ProfileComponent,
-    NavbarComponent
+    NavbarComponent,
+    RotateDirective
   ],
   imports: [
     BrowserModule,
