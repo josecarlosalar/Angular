@@ -11,37 +11,42 @@ import { Router } from '@angular/router';
 
 export class LoginComponent {
 
-  username:string;
-  password:string;
+  username='';
+  password='';
   spinVisible = false;
   gologinSubscription: Subscription = new Subscription();
   
 
   constructor(private authService: AuthService, private router: Router) {
-    this.username = '';
-    this.password = '';
+    
   }
 
   resetInput(){
     this.username = '';
     this.password = '';
   }
+
+  upsateSpinVisible(state:boolean){
+    this.spinVisible=state;
+  }
+
+  loginOk(){
+    this.authService.loginSubject.next(true);
+    this.router.navigate(['/dashboard']);
+  }
     
   login() {
-    this.spinVisible=true;
+    this.upsateSpinVisible(true);
     this.gologinSubscription = this.authService.login(this.username, this.password).subscribe((result) => {
      
       if (result) {
-        this.spinVisible = false;
-        this.authService.loginSubject.next(true);
-        this.router.navigate(['/dashboard']);
+        this.upsateSpinVisible(false);
+        this.loginOk();
 
       } else {
+        this.upsateSpinVisible(false);
         console.log("Error de inicio de sesión");
-        this.spinVisible = false;
       }
     });
   }
-
-
 }

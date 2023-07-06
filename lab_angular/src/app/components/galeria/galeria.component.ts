@@ -54,6 +54,10 @@ export class GaleriaComponent {
       this.comprobarId();
   }
 
+  callView(id:number){
+    this.view(this.listaFotos.filter(filtro => filtro.id == id)[0]);
+  }
+
   reproducirFotos(){
     
     setInterval(()=>{
@@ -64,9 +68,8 @@ export class GaleriaComponent {
         } else {
           this.id = this.id+1;
         }
-        const result = this.listaFotos.filter(filtro => filtro.id == this.id);
-        this.view(result[0]);
-        this.comprobarId();
+
+       this.callView(this.id);
         
       }
     },2000);
@@ -110,14 +113,25 @@ export class GaleriaComponent {
     return "none";
   }
 
+  updateId(signo:string){
+    switch (signo){
+      case '-':
+        this.id = this.id-1;
+        break;
+  
+      case '+':
+        this.id = this.id+1;
+        break;
+    }
+    this.callView(this.id);
+  }
+
   anterior(){
     if (!this.disableAnt){
       if (this.id == 1){
         this.disableAnt = true;
       } else {
-        this.id = this.id-1;
-        const result = this.listaFotos.filter(filtro => filtro.id == this.id);
-        this.view(result[0]);
+        this.updateId('-');
       }
       this.comprobarId();
     }
@@ -128,9 +142,7 @@ export class GaleriaComponent {
       if (this.id == 8){
         this.disableSig = true;
       } else {
-        this.id = this.id+1;
-        const result = this.listaFotos.filter(filtro => filtro.id == this.id);
-        this.view(result[0]);
+        this.updateId('+');
       }
       this.comprobarId();
     }
