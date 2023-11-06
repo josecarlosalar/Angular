@@ -1,4 +1,4 @@
-# Lab Angular Lemoncode
+# Angular
 
 Este Lab incluye los siguientes puntos:
 - Layout completo de mini-aplicación incluyendo reto de persistencia de datos.
